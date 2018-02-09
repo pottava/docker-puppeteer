@@ -23,5 +23,5 @@ const puppeteer = require('puppeteer');
     browser.close();
 })();
 EOF
-$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeter:0.11 index.js
+$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:0.11-jp index.js
 ```

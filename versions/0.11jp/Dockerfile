@@ -1,5 +1,5 @@
-# Puppeter
-# docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeter:0.11-jp
+# Puppeteer
+# docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:0.11-jp
 
 FROM node:9.5-alpine
 
