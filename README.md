@@ -4,7 +4,8 @@
 
 ## Supported tags and respective `Dockerfile` links:
 
-・latest ([versions/0.11jp/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/0.11jp/Dockerfile))  
+・latest ([versions/1.0/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.0/Dockerfile))  
+・1.0 ([versions/1.0/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.0/Dockerfile))  
 ・0.11-jp ([versions/0.11jp/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/0.11jp/Dockerfile))  
 ・0.11 ([versions/0.11/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/0.11/Dockerfile))  
 
