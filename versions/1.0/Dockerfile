@@ -45,10 +45,9 @@ WORKDIR /work
 RUN groupadd -r puppeteer \
     && useradd -r -g puppeteer -G audio,video puppeteer \
     && echo 'puppeteer ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && chown -R puppeteer:puppeteer /node_modules \
-    && chown -R puppeteer:puppeteer /work
+    && chown -R puppeteer:puppeteer /home/puppeteer /node_modules /work \
 ADD index.js /home/puppeteer/index.js
 USER puppeteer
 
-ENTRYPOINT ["tini", "--", "node"]
-CMD ["/home/puppeteer/index.js"]
+ENTRYPOINT ["tini", "--"]
+CMD ["node", "/home/puppeteer/index.js"]
