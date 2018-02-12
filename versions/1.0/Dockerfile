@@ -22,8 +22,8 @@ RUN apt-get update \
     && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
        >> /etc/apt/sources.list.d/google.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends google-chrome-unstable ttf-freefont \
-       fonts-ipafont-gothic --no-install-recommends \
+    && apt-get install -y --no-install-recommends google-chrome-unstable \
+       ttf-freefont fonts-ipafont-gothic \
     && mkdir -p /usr/share/fonts/emoji \
     && curl --location --silent --show-error --out /usr/share/fonts/emoji/emojione-android.ttf \
        https://github.com/emojione/emojione-assets/releases/download/3.1.2/emojione-android.ttf \
@@ -44,9 +44,11 @@ WORKDIR /work
 # Add a user for Puppeteer
 RUN groupadd -r puppeteer \
     && useradd -r -g puppeteer -G audio,video puppeteer \
-    && echo 'puppeteer ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && chown -R puppeteer:puppeteer /home/puppeteer /node_modules /work \
+    && echo 'puppeteer ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 ADD index.js /home/puppeteer/index.js
+RUN chown -R puppeteer:puppeteer /home/puppeteer /node_modules /work
+
 USER puppeteer
 
 ENTRYPOINT ["tini", "--"]
