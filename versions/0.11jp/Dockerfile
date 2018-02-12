@@ -32,7 +32,7 @@ WORKDIR /work
 # Add a user for Puppeteer
 RUN addgroup -S puppeteer \
     && adduser -G puppeteer -D puppeteer \
-    && chown -R puppeteer:puppeteer /work
+    && chown -R puppeteer:puppeteer /home/puppeteer /work
 ADD index.js /home/puppeteer/index.js
 
 # Enable puppeteer to sudo
@@ -42,5 +42,5 @@ RUN apk --no-cache add sudo \
 
 USER puppeteer
 
-ENTRYPOINT ["tini", "--", "node"]
-CMD ["/home/puppeteer/index.js"]
+ENTRYPOINT ["tini", "--"]
+CMD ["node", "/home/puppeteer/index.js"]
