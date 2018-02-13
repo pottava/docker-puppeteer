@@ -4,8 +4,9 @@
 FROM node:9.5-slim
 
 ENV PUPPETEER_VERESION=1.0.0 \
-    NODE_PATH="/usr/local/share/.config/yarn/global/node_modules"
+    NODE_PATH="/node_modules:/usr/local/lib/node_modules"
 
+# Install tini for a proper init process
 RUN url=https://github.com/krallin/tini/releases/download/v0.16.1 \
     && wget -qO /usr/local/bin/tini ${url}/tini-amd64 \
     && wget -qO /usr/local/bin/tini.asc ${url}/tini-amd64.asc \
@@ -37,7 +38,8 @@ RUN apt-get update \
 
 # Install Puppeteer
 RUN export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    && npm install puppeteer@${PUPPETEER_VERESION}
+    && npm install --global puppeteer@${PUPPETEER_VERESION} \
+    && mkdir /node_modules
 
 WORKDIR /work
 
