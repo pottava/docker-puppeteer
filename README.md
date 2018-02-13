@@ -85,22 +85,22 @@ const puppeteer = require('puppeteer');
   await page.type('#searchbox input', 'Headless Chrome');
 
   // Wait for suggest overlay to appear and click "show all results".
-  const allResultsSelector = '.devsite-suggest-all-results';
-  await page.waitForSelector(allResultsSelector);
-  await page.click(allResultsSelector);
+  const btn = '.devsite-suggest-all-results';
+  await page.waitForSelector(btn);
+  await page.click(btn);
 
   // Wait for the results page to load and display the results.
-  const resultsSelector = '.gsc-results .gsc-thumbnail-inside a.gs-title';
-  await page.waitForSelector(resultsSelector);
+  const results = '.gsc-results .gsc-thumbnail-inside a.gs-title';
+  await page.waitForSelector(results);
 
   // Extract the results from the page.
-  const links = await page.evaluate(resultsSelector => {
-    const anchors = Array.from(document.querySelectorAll(resultsSelector));
+  const links = await page.evaluate(selector => {
+    const anchors = Array.from(document.querySelectorAll(selector));
     return anchors.map(anchor => {
       const title = anchor.textContent.split('|')[0].trim();
       return \`\${title} - \${anchor.href}\`;
     });
-  }, resultsSelector);
+  }, results);
   console.log(links.join('\n'));
 
   await browser.close();
@@ -108,5 +108,5 @@ const puppeteer = require('puppeteer');
 EOF
 $ ifconfig en0
 $ docker run --rm -it --cap-add=SYS_ADMIN -e DISPLAY=192.168.x.y:0 \
-    pottava/puppeteer:1.0 node -e "$(cat google.js)"
+    pottava/puppeteer:1.0 node -e "$(cat index.js)"
 ```
