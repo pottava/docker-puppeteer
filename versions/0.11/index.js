@@ -6,8 +6,8 @@ const puppeteer = require('puppeteer');
         executablePath: 'chromium-browser'
     });
     const page = await browser.newPage();
-    await page.goto('https://example.com');
-    await page.screenshot({path: 'example.png'});
+    await page.goto(process.env.TARGET || 'https://example.com');
+    await page.screenshot({path: 'sample-' + new Date().getTime() + ".png" });
 
     browser.close();
 
