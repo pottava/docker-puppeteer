@@ -1,5 +1,28 @@
 const puppeteer = require('puppeteer');
 const test = require('ava');
+const { IncomingWebhook } = require('@slack/client');
+
+const slackhook = (text, err) => new Promise(resolve => {
+    if (! process.env.SLACK_WEBHOOK_URL) {
+        console.log(text);
+        resolve();
+        return;
+    }
+    const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
+    webhook.send({
+        "text": (err ? err : text),
+        "attachments": [{
+            "color": (err ? 'danger' : 'good'),
+            "fields": [{
+                "title": "Status",
+                "value": (err ? 'failed' : 'success'),
+                "short": false
+            }]
+        }]
+    }, (err, _, status) => {
+        resolve({status: status, err: err});
+    });
+});
 
 test.serial('check form result', async (t) => {
     const browser = await puppeteer.launch({
@@ -7,7 +30,8 @@ test.serial('check form result', async (t) => {
     });
     const page = await browser.newPage();
 
-    let links;
+    var links;
+    var err;
     try {
         await page.goto('https://developers.google.com/web/');
         await page.type('#searchbox input', 'Headless Chrome');
@@ -30,10 +54,13 @@ test.serial('check form result', async (t) => {
         await page.screenshot({ path: 'sample-' + new Date().getTime() + ".png" });
 
     } catch (e) {
-        t.fail(e);
+        err = e;
     }
     await browser.close();
 
-    console.log(links)
-    t.truthy(links);
+    await slackhook(links.join('\n'), err);
+    if (err) {
+      t.fail(err);
+    }
+    t.truthy('success');
 });

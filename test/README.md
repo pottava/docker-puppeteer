@@ -10,5 +10,5 @@
 
 ```
 $ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work \
-    pottava/puppeteer:1.0-test ava /home/puppeteer/index.js
+    -e SLACK_WEBHOOK_URL pottava/puppeteer:1.0-test
 ```
