@@ -4,6 +4,7 @@
 
 ## Supported tags and respective `Dockerfile` links:
 
+・1.1-test ([test/versions/1.1/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/test/versions/1.1/Dockerfile))  
 ・1.0-test ([test/versions/1.0/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/test/versions/1.0/Dockerfile))  
 
 ## Usage
