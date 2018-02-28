@@ -4,7 +4,8 @@
 
 ## Supported tags and respective `Dockerfile` links:
 
-・latest ([versions/1.0/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.0/Dockerfile))  
+・latest ([versions/1.1/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.1/Dockerfile))  
+・1.1 ([versions/1.1/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.1/Dockerfile))  
 ・1.0 ([versions/1.0/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.0/Dockerfile))  
 ・0.11-jp ([versions/0.11jp/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/0.11jp/Dockerfile))  
 ・0.11 ([versions/0.11/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/0.11/Dockerfile))  
@@ -30,7 +31,7 @@ const puppeteer = require('puppeteer');
   browser.close();
 })();
 EOF
-$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:1.0 node index.js
+$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:1.1 node index.js
 ```
 
 - v0.11
@@ -108,5 +109,5 @@ const puppeteer = require('puppeteer');
 EOF
 $ ifconfig en0
 $ docker run --rm -it --cap-add=SYS_ADMIN -e DISPLAY=192.168.x.y:0 \
-    pottava/puppeteer:1.0 node -e "$(cat index.js)"
+    pottava/puppeteer:1.1 node -e "$(cat index.js)"
 ```
