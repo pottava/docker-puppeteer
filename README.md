@@ -4,7 +4,8 @@
 
 ## Supported tags and respective `Dockerfile` links:
 
-・latest ([versions/1.2/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.2/Dockerfile))  
+・latest ([versions/1.4/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.4/Dockerfile))  
+・1.4 ([versions/1.4/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.4/Dockerfile))  
 ・1.2 ([versions/1.2/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.2/Dockerfile))  
 ・1.1 ([versions/1.1/Dockerfile](https://github.com/pottava/docker-puppeteer/blob/master/versions/1.1/Dockerfile))  
 
@@ -27,7 +28,7 @@ const puppeteer = require('puppeteer');
   browser.close();
 })();
 EOF
-$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:1.1 node index.js
+$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer node index.js
 ```
 
 ### headless false
@@ -83,5 +84,5 @@ const puppeteer = require('puppeteer');
 EOF
 $ ifconfig en0
 $ docker run --rm -it --cap-add=SYS_ADMIN -e DISPLAY=192.168.x.y:0 \
-    pottava/puppeteer:1.1 node -e "$(cat index.js)"
+    pottava/puppeteer node -e "$(cat index.js)"
 ```
