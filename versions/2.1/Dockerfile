@@ -8,16 +8,9 @@ ENV PUPPETEER_VERESION=2.1.0 \
 
 # Install tini for a proper init process
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends wget gpg ca-certificates dirmngr \
+    && apt-get install -y --no-install-recommends wget gpg ca-certificates \
     && url=https://github.com/krallin/tini/releases/download/v0.18.0 \
     && wget -qO /usr/local/bin/tini ${url}/tini-amd64 \
-    && wget -qO /usr/local/bin/tini.asc ${url}/tini-amd64.asc \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 \
-         --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
-    && gpg --batch --verify /usr/local/bin/tini.asc /usr/local/bin/tini \
-    && rm -r "${GNUPGHOME}" /usr/local/bin/tini.asc \
-    && apt-get purge --auto-remove -y gpg dirmngr \
     && chmod +x /usr/local/bin/tini
 
 # Install chromium & system fonts
