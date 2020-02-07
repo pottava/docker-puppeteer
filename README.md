@@ -18,7 +18,8 @@ $ cat << EOF > index.js
 const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch({
-    executablePath: 'google-chrome-unstable'
+    executablePath: 'google-chrome-unstable',
+    args: ['--no-sandbox']
   });
   const page = await browser.newPage();
   await page.goto('http://getemoji.com', {waitUntil: 'domcontentloaded'});
@@ -26,7 +27,7 @@ const puppeteer = require('puppeteer');
   browser.close();
 })();
 EOF
-$ docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:2.1 node index.js
+$ docker run --rm -v $(pwd):/work pottava/puppeteer:2.1 node index.js
 ```
 
 ### headless false
@@ -78,7 +79,6 @@ const puppeteer = require('puppeteer');
   await browser.close();
 })();
 EOF
-$ ifconfig en0
-$ docker run --rm -it --cap-add=SYS_ADMIN -e DISPLAY=192.168.x.y:0 \
-    pottava/puppeteer:2.1 node -e "$(cat index.js)"
+$ your_local_ip_address="$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')"
+$ docker run --rm -e DISPLAY="${your_local_ip_address}:0" pottava/puppeteer:2.1 node -e "$(cat index.js)"
 ```

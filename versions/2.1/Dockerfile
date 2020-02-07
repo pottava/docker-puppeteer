@@ -1,5 +1,5 @@
 # Puppeteer
-# docker run --rm -it --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:2.1
+# docker run --rm --cap-add=SYS_ADMIN -v $(pwd):/work pottava/puppeteer:2.1
 
 FROM node:12.14.1-slim
 
